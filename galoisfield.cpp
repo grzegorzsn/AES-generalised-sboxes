@@ -4,21 +4,35 @@ GaloisField::GaloisField()
 {
 }
 
-GFNumber GaloisField::Multiply(GFNumber a, GFNumber b)
+GFNumber GaloisField::multiply(GFNumber a, GFNumber b)
 {
-    if(degree(a) + degree(b) > 63) throw std::invalid_argument("Too big degrees to compute.");
-    std::bitset<64> result = std::bitset<64>();
-    result.reset();
-    for(int i = 63; i >= 0; i--)
-        for(int j = 63; j >= 0; j--)
-            if(a[i] && b[j])
-                result.flip(i+j);
-    return GFNumber(result.to_ullong());
+    GFNumber result = multiplyWithoutModulus(a, b);
+    if( modulus.to_ullong() > 0) result = findModulo(result);
+    return result;
 }
 
 GFNumber GaloisField::getModulus()
 {
     return modulus;
+}
+
+GFNumber GaloisField::multiplyWithoutModulus(GFNumber a, GFNumber b)
+{
+    if(degree(a) + degree(b) > BITSET_LEN) throw std::invalid_argument("Too big degrees to compute.");
+    GFNumber result = GFNumber();
+    result.reset();
+    for(int i = degree(a); i >= 0; i--)
+        for(int j = degree(b); j >= 0; j--)
+            if(a[i] && b[j])
+                result.flip(i+j);
+    return result;
+}
+
+GFNumber GaloisField::findModulo(GFNumber a)
+{
+    GFNumber result;
+    // TODO: fill with implementation :)
+    return result;
 }
 
 void GaloisField::setModulus(GFNumber value)

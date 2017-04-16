@@ -2,6 +2,7 @@
 #define GFIELD_H
 #include <bitset>
 #include <sstream>
+#include <iostream>
 using namespace std;
 
 const uint8_t BITSET_LEN = 64;
@@ -11,14 +12,16 @@ class GaloisField
 {
 public:
     GaloisField();
-    bool InField(bitset<64> a);
-    GFNumber Multiply(GFNumber a, GFNumber b);
+    bool inField(GFNumber a);
+    GFNumber multiply(GFNumber a, GFNumber b);
     string display(GFNumber bits);
     uint8_t degree(GFNumber bits);
     GFNumber getModulus();
-    void setModulus(bitset<64> value);
+    void setModulus(GFNumber value);
 
 protected:
+    GFNumber multiplyWithoutModulus(GFNumber a, GFNumber b);
+    GFNumber findModulo(GFNumber a);
     GFNumber modulus;
 };
 

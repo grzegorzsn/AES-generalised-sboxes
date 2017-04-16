@@ -13,18 +13,18 @@ std::vector<GFNumber> GFIrrPolGenerator::generate()
     uint64_t limit = pow(2, maxDegree + 1);
     cout << "limit: " << limit;
     bool *isIrreducible = new bool[limit];
-    for(int i = 0; i*i < limit; i++)
+    for(int i = 0; i < limit; i++)
         isIrreducible[i] = true;
     isIrreducible[0] = false;
     isIrreducible[1] = false;
-    for(int i = 0; i < limit; i++)
+
+    for(int i = 0; gf.degree(GFNumber(i)) <= maxDegree; i++)
     {
         if(isIrreducible[i])
         {
-            for(int j = i; j < limit; j++)
+            for(int j = i; gf.degree(GFNumber(i)) + gf.degree(GFNumber(j)) <= maxDegree; j++)
             {
-
-                GFNumber reducible = gf.Multiply(GFNumber(i),GFNumber(j));
+                GFNumber reducible = gf.multiply(GFNumber(i),GFNumber(j));
                 isIrreducible[reducible.to_ullong()] = false;
             }
         }
@@ -37,6 +37,7 @@ std::vector<GFNumber> GFIrrPolGenerator::generate()
     for(int i = 0; i < result.size(); i++)
         std::cout << gf.display(result[i]) << std::endl;
 
+    delete [] isIrreducible;
     return result;
 }
 

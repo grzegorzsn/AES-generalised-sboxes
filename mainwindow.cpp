@@ -17,10 +17,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnGenerate_clicked()
 {
-    uint8_t degree = ui->sbDegree->value();
-    GFIrrPolGenerator * irrPolGen = new GFIrrPolGenerator();
-    irrPolGen->setMaxDegree(degree);
-    irrPolGen->generate();
-    ui->lblDegree->setText("OH!");
+    try
+    {
+        uint8_t degree = ui->sbDegree->value();
+        GFIrrPolGenerator * irrPolGen = new GFIrrPolGenerator();
+        irrPolGen->setMaxDegree(degree);
+        irrPolGen->generate();
+        //ui->lblDegree->setText("OH!");
+    }
+    catch (exception e)
+    {
+        cout << e.what() << endl;
+    }
 
 }
