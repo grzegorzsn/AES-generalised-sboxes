@@ -8,9 +8,10 @@ GFIrrPolGenerator::GFIrrPolGenerator()
 
 }
 
-std::vector<GFNumber *> GFIrrPolGenerator::generate()
+std::vector<GFNumber> GFIrrPolGenerator::generate()
 {
-    uint64_t limit = std::pow(2, maxDegree + 1);
+    uint64_t limit = pow(2, maxDegree + 1);
+    cout << "limit: " << limit;
     bool *isIrreducible = new bool[limit];
     for(int i = 0; i*i < limit; i++)
         isIrreducible[i] = true;
@@ -23,18 +24,18 @@ std::vector<GFNumber *> GFIrrPolGenerator::generate()
             for(int j = i; j < limit; j++)
             {
 
-                uint64_t reducible = (GFNumber(i)*GFNumber(j)).getBits();
-                isIrreducible[reducible] = false;
+                GFNumber reducible = gf.Multiply(GFNumber(i),GFNumber(j));
+                isIrreducible[reducible.to_ullong()] = false;
             }
         }
     }
 
-    std::vector<GFNumber*>result = std::vector<GFNumber*>();
+    std::vector<GFNumber>result = std::vector<GFNumber>();
     for(int i = 0; i < limit; i++)
-        if(isIrreducible[i]) result.push_back(new GFNumber(i));
+        if(isIrreducible[i]) result.push_back(GFNumber(i));
 
     for(int i = 0; i < result.size(); i++)
-        std::cout << result[i]->toString() << std::endl;
+        std::cout << gf.display(result[i]) << std::endl;
 
     return result;
 }

@@ -25,13 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    gfnumber.cpp \
-    gfield.cpp \
-    gfirrpolgenerator.cpp
+    gfirrpolgenerator.cpp \
+    galoisfield.cpp
 
 HEADERS  += mainwindow.h \
-    gfnumber.h \
-    gfield.h \
-    gfirrpolgenerator.h
+    gfirrpolgenerator.h \
+    galoisfield.h
 
 FORMS    += mainwindow.ui
