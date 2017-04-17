@@ -6,7 +6,7 @@ GaloisField::GaloisField()
 
 GFNumber GaloisField::multiply(GFNumber a, GFNumber b)
 {
-    GFNumber result = multiplyWithoutModulus(a, b);
+    GFNumber result = multiplyWithoutModulo(a, b);
     if( modulus.to_ullong() > 0) result = findModulo(result);
     return result;
 }
@@ -16,7 +16,7 @@ GFNumber GaloisField::getModulus()
     return modulus;
 }
 
-GFNumber GaloisField::multiplyWithoutModulus(GFNumber a, GFNumber b)
+GFNumber GaloisField::multiplyWithoutModulo(GFNumber a, GFNumber b)
 {
     if(degree(a) + degree(b) > BITSET_LEN) throw std::invalid_argument("Too big degrees to compute.");
     GFNumber result = GFNumber();
@@ -30,8 +30,23 @@ GFNumber GaloisField::multiplyWithoutModulus(GFNumber a, GFNumber b)
 
 GFNumber GaloisField::findModulo(GFNumber a)
 {
-    GFNumber result;
-    // TODO: fill with implementation :)
+    // TODO: remove those output.
+    //cout << "findModulo: " << endl;
+    //cout << "a: " << display(a) << endl;
+    //cout << "mod: " << display(modulus) << endl;
+    GFNumber result = a;
+    while(degree(result) >= degree(modulus))
+    {
+        uint8_t diff = degree(result) - degree(modulus);
+        GFNumber quotient = GFNumber(0);
+        quotient.set(diff);
+        //cout << "quotient: " << display(quotient) << endl;
+        GFNumber product = multiplyWithoutModulo(quotient, modulus);
+        //cout << "product: " << display(product) << endl;
+        result ^= product;
+        //cout << "result: " << display(result) << endl;
+
+    }
     return result;
 }
 
@@ -42,22 +57,28 @@ void GaloisField::setModulus(GFNumber value)
 
 string GaloisField::display(GFNumber bits)
 {
-    stringstream ss = stringstream();
+    stringstream result = stringstream();
     bool firstXReached = false;
     for(int i = 63; i >= 0; i--)
+    {
+        stringstream part = stringstream();
+        if(i == 0) part << "1";
+        else if(i == 1) part << "x";
+        else part << "x^" << i ;
         if (bits[i])
         {
             if(!firstXReached)
             {
-                ss << "x^" << i;
+                result << part.str();
                 firstXReached = true;
             }
             else
             {
-                ss << " + x^" << i;
+                result << " + " << part.str();
             }
         }
-    return ss.str();
+    }
+    return result.str();
 }
 
 uint8_t GaloisField::degree(GFNumber bits)

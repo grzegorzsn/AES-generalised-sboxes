@@ -14,13 +14,13 @@ public:
     GaloisField();
     bool inField(GFNumber a);
     GFNumber multiply(GFNumber a, GFNumber b);
-    string display(GFNumber bits);
+    static string display(GFNumber bits);
     uint8_t degree(GFNumber bits);
     GFNumber getModulus();
     void setModulus(GFNumber value);
 
 protected:
-    GFNumber multiplyWithoutModulus(GFNumber a, GFNumber b);
+    GFNumber multiplyWithoutModulo(GFNumber a, GFNumber b);
     GFNumber findModulo(GFNumber a);
     GFNumber modulus;
 };
