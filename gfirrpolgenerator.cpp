@@ -11,7 +11,6 @@ GFIrrPolGenerator::GFIrrPolGenerator()
 std::vector<GFNumber> GFIrrPolGenerator::generate()
 {
     uint64_t limit = pow(2, maxDegree + 1);
-    cout << "limit: " << limit;
     bool *isIrreducible = new bool[limit];
     for(int i = 0; i < limit; i++)
         isIrreducible[i] = true;
@@ -34,8 +33,6 @@ std::vector<GFNumber> GFIrrPolGenerator::generate()
     for(int i = 0; i < limit; i++)
         if(isIrreducible[i]) result.push_back(GFNumber(i));
 
-    for(int i = 0; i < result.size(); i++)
-        std::cout << gf.display(result[i]) << std::endl;
 
     delete [] isIrreducible;
     return result;

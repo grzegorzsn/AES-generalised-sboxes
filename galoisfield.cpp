@@ -1,14 +1,58 @@
 #include "galoisfield.h"
+#include "extendedeuclideanalgorithm.h"
 
 GaloisField::GaloisField()
 {
 }
 
+GaloisField::GaloisField(GFNumber modulus)
+{
+    this->modulus = modulus;
+}
+
 GFNumber GaloisField::multiply(GFNumber a, GFNumber b)
 {
     GFNumber result = multiplyWithoutModulo(a, b);
-    if( modulus.to_ullong() > 0) result = findModulo(result);
+    if( modulus.to_ullong() > 0) result = modulo(result, modulus);
     return result;
+}
+
+GFNumber GaloisField::divide(GFNumber a, GFNumber b)
+{
+    GFNumber result = GFNumber(0);
+    while(degree(a) >= degree(b))
+    {
+        uint8_t diff = degree(a) - degree(b);
+        GFNumber quotient = GFNumber(0);
+        quotient.set(diff);
+        result.set(diff);
+        GFNumber product = multiplyWithoutModulo(quotient, b);
+        a ^= product;
+        cout << display(a);
+    }
+
+    return result;
+}
+
+GFNumber GaloisField::modulo(GFNumber a, GFNumber b)
+{
+    GFNumber result = a;
+    while(degree(result) >= degree(b))
+    {
+        uint8_t diff = degree(result) - degree(b);
+        GFNumber quotient = GFNumber(0);
+        quotient.set(diff);
+        GFNumber product = multiplyWithoutModulo(quotient, b);
+        result ^= product;
+    }
+    return result;
+}
+
+GFNumber GaloisField::multiplicativeInverse(GFNumber a)
+{
+    ExtendedEuclideanAlgorithm eea = ExtendedEuclideanAlgorithm(a, modulus);
+    eea.compute();
+    return eea.getS();
 }
 
 GFNumber GaloisField::getModulus()
@@ -25,28 +69,6 @@ GFNumber GaloisField::multiplyWithoutModulo(GFNumber a, GFNumber b)
         for(int j = degree(b); j >= 0; j--)
             if(a[i] && b[j])
                 result.flip(i+j);
-    return result;
-}
-
-GFNumber GaloisField::findModulo(GFNumber a)
-{
-    // TODO: remove those output.
-    //cout << "findModulo: " << endl;
-    //cout << "a: " << display(a) << endl;
-    //cout << "mod: " << display(modulus) << endl;
-    GFNumber result = a;
-    while(degree(result) >= degree(modulus))
-    {
-        uint8_t diff = degree(result) - degree(modulus);
-        GFNumber quotient = GFNumber(0);
-        quotient.set(diff);
-        //cout << "quotient: " << display(quotient) << endl;
-        GFNumber product = multiplyWithoutModulo(quotient, modulus);
-        //cout << "product: " << display(product) << endl;
-        result ^= product;
-        //cout << "result: " << display(result) << endl;
-
-    }
     return result;
 }
 

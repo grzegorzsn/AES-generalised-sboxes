@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QStandardItemModel>
 #include <iostream>
+#include "gfirrpolgenerator.h"
+#include "extendedeuclideanalgorithm.h"
 
 namespace Ui {
 class MainWindow;

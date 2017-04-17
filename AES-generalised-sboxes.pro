@@ -26,10 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     gfirrpolgenerator.cpp \
-    galoisfield.cpp
+    galoisfield.cpp \
+    extendedeuclideanalgorithm.cpp
 
 HEADERS  += mainwindow.h \
     gfirrpolgenerator.h \
-    galoisfield.h
+    galoisfield.h \
+    gfnumber.h \
+    extendedeuclideanalgorithm.h
 
 FORMS    += mainwindow.ui

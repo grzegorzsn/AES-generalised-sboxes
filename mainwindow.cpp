@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "gfirrpolgenerator.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,8 +33,6 @@ void MainWindow::on_btnGenerate_clicked()
         stdModel->appendColumn(dataList);
         ui->lstIrrPol->setModel(stdModel);
 
-       // ui->lstIrrPol->show();
-        //ui->lblDegree->setText("OH!");
     }
     catch (exception e)
     {
