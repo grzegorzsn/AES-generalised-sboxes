@@ -37,7 +37,7 @@ void SBoxTest::substituteTest3()
     QCOMPARE(result, expected);
 }
 
-void SBoxTest::substitutionTableTest()
+void SBoxTest::substitutionTableTest1()
 {
     GFNumber modulus = 0x11b;
     SBox sbox = SBox(modulus);
@@ -48,4 +48,13 @@ void SBoxTest::substitutionTableTest()
     QCOMPARE(table[1], GFNumber(0x7c));
     QCOMPARE(table[254], GFNumber(0xbb));
     QCOMPARE(table[255], GFNumber(0x16));
+}
+
+void SBoxTest::substitutionTableTest2()
+{
+    GFNumber modulus = 0x165;
+    SBox sbox = SBox(modulus);
+    vector<GFNumber> table = sbox.substitionTable();
+    vector<GFNumber>::size_type expectedSize = 256;
+    QCOMPARE(table.size(), expectedSize);
 }

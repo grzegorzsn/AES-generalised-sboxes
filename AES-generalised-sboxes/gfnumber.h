@@ -2,7 +2,7 @@
 #define GFNUMBER_H
 #include <bitset>
 using namespace std;
-const uint8_t BITSET_LEN = 64;
+const uint8_t BITSET_LEN = 16;
 typedef bitset<BITSET_LEN> GFNumber;
 
 #endif // GFNUMBER_H

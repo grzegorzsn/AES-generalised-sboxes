@@ -80,7 +80,7 @@ string GaloisField::display(GFNumber bits)
 {
     stringstream result = stringstream();
     bool firstXReached = false;
-    for(int i = 63; i >= 0; i--)
+    for(int i = GFNumber(0).size()-1; i >= 0; i--)
     {
         stringstream part = stringstream();
         if(i == 0) part << "1";
@@ -109,7 +109,7 @@ int8_t GaloisField::degree(GFNumber bits)
     // or is defined to be negative (usually −1 or −∞).
     // Let assume it is -1.
     if(bits == GFNumber(0)) return -1;
-    for(int i = 63; i > 0; i--)
+    for(int i = GFNumber(0).size()-1; i > 0; i--)
         if (bits[i])
             return i;
     return 0;

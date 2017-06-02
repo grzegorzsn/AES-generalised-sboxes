@@ -16,6 +16,7 @@ private Q_SLOTS:
     void substituteTest1();
     void substituteTest2();
     void substituteTest3();
-    void substitutionTableTest();
+    void substitutionTableTest1();
+    void substitutionTableTest2();
 };
 
