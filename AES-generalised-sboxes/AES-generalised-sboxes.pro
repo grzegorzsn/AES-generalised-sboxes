@@ -29,15 +29,19 @@ SOURCES += extendedeuclideanalgorithm.cpp \
     gfirrpolgenerator.cpp \
     main.cpp \
     mainwindow.cpp \
+    sbox.cpp \
     UnitTests/galoisfieldtest.cpp \
-    UnitTests/extendedeuclideanalgorithmtest.cpp
+    UnitTests/extendedeuclideanalgorithmtest.cpp \
+    UnitTests/sboxtest.cpp
 
 HEADERS  += extendedeuclideanalgorithm.h \
     galoisfield.h \
     gfirrpolgenerator.h \
     gfnumber.h \
     mainwindow.h \
+    sbox.h \
     UnitTests/galoisfieldtest.h \
-    UnitTests/extendedeuclideanalgorithmtest.h
+    UnitTests/extendedeuclideanalgorithmtest.h \
+    UnitTests/sboxtest.h
 
 FORMS    += mainwindow.ui

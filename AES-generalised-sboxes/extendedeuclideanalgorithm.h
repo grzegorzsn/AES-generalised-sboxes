@@ -31,10 +31,7 @@ class ExtendedEuclideanAlgorithm
 public:
     ExtendedEuclideanAlgorithm();
     ExtendedEuclideanAlgorithm(GFNumber g, GFNumber h);
-    //ExtendedEuclideanAlgorithm(GFNumber modulus);
-    //ExtendedEuclideanAlgorithm(GFNumber g, GFNumber h, GFNumber modulus);
     void setInput(GFNumber g, GFNumber h);
-    //void setGFModulus(GFNumber modulus);
     void compute();
     GFNumber getD();
     GFNumber getS();

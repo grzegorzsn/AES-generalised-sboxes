@@ -11,28 +11,11 @@ ExtendedEuclideanAlgorithm::ExtendedEuclideanAlgorithm(GFNumber g, GFNumber h)
     this->gf = GaloisField();
 }
 
-//ExtendedEuclideanAlgorithm::ExtendedEuclideanAlgorithm(GFNumber modulus)
-//{
-//    this->setGFModulus(modulus);
-//}
-
-//ExtendedEuclideanAlgorithm::ExtendedEuclideanAlgorithm(GFNumber g, GFNumber h, GFNumber modulus)
-//{
-//    this->setInput(g,h);
-//    this->setGFModulus(modulus);
-//}
-
 void ExtendedEuclideanAlgorithm::setInput(GFNumber g, GFNumber h)
 {
     this->g = g;
     this->h = h;
 }
-
-//void ExtendedEuclideanAlgorithm::setGFModulus(GFNumber modulus)
-//{
-//    gf = GaloisField(modulus);
-//}
-
 
 // Description of algorithm provided in header.
 void ExtendedEuclideanAlgorithm::compute()

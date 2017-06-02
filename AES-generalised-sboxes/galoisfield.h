@@ -18,7 +18,7 @@ public:
     GFNumber modulo(GFNumber a, GFNumber b);
     GFNumber multiplicativeInverse(GFNumber a);
     static string display(GFNumber bits);
-    int8_t degree(GFNumber bits);
+    static int8_t degree(GFNumber bits);
     GFNumber getModulus();
     void setModulus(GFNumber value);
 

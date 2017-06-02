@@ -2,14 +2,17 @@
 #include <QApplication>
 #include <QTest>
 #include "UnitTests/galoisfieldtest.h"
-#include <UnitTests/extendedeuclideanalgorithmtest.h>
+#include "UnitTests/extendedeuclideanalgorithmtest.h"
+#include "UnitTests/sboxtest.h"
 
 void executeTests()
 {
     GaloisFieldTest gfTest;
     ExtendedEuclideanAlgorithmTest eeaTest;
+    SBoxTest sboxTest;
     QTest::qExec(&gfTest);
     QTest::qExec(&eeaTest);
+    QTest::qExec(&sboxTest);
 }
 
 
