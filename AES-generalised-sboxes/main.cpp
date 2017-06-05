@@ -21,7 +21,8 @@ void executeTests()
 
 int main(int argc, char *argv[])
 {
-    executeTests();
+    // During development uncomment line below to enable unit testing
+    // executeTests();
 
     QApplication a(argc, argv);
     MainWindow w;

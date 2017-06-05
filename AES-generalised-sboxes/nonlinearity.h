@@ -3,6 +3,18 @@
 #include "sbox.h"
 #include <math.h>
 
+/*
+ *  Calculation are based on following document.
+ *
+ * Generalised S-Box Nonlinearity
+ * NES/DOC/UIB/WP5/020/A
+ * Matthew G. Parker 1 2
+ * Institute for Informatics,
+ * University of Bergen, Norway
+ *
+ * www.ii.uib.no/~matthew/SBoxLin.pdf
+ *
+ */
 
 class NonLinearity
 {

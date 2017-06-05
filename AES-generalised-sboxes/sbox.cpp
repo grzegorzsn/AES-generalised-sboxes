@@ -51,8 +51,6 @@ uint8_t SBox::rotate(uint8_t x)
     return ((x) << (1) | ((x) >> (7)));
 }
 
-
-
 GFNumber SBox::affineTransformation(GFNumber s)
 {
     if(GaloisField::degree(s) >= 8 )

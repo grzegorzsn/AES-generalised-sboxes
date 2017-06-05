@@ -1,6 +1,6 @@
 #include "nonlinearity.h"
 
-
+// Implementation of equation nr 7
 double NonLinearity::compute()
 {
     int n = 8;
@@ -13,6 +13,7 @@ NonLinearity::NonLinearity(SBox _sbox)
     substitionTable = sbox.substitionTable();
 }
 
+// Implementation of equation nr 2
 double NonLinearity::WHTValue(GFNumber k, int u)
 {
     int sum = 0;
@@ -24,6 +25,7 @@ double NonLinearity::WHTValue(GFNumber k, int u)
     return pow(2.0, -8.0) * sum;
 }
 
+// Implementation of equation nr 5
 double NonLinearity::PARValue()
 {
     double max = WHTValue(GFNumber(0), 0);
