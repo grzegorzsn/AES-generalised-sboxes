@@ -1,6 +1,5 @@
 #ifndef NONLINEARITY_H
 #define NONLINEARITY_H
-#include "function.h"
 #include "sbox.h"
 #include <math.h>
 

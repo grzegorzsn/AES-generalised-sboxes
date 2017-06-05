@@ -34,7 +34,6 @@ SOURCES += extendedeuclideanalgorithm.cpp \
     UnitTests/extendedeuclideanalgorithmtest.cpp \
     UnitTests/sboxtest.cpp \
     UnitTests/nonlinearitytest.cpp \
-    function.cpp \
     nonlinearity.cpp
 
 HEADERS  += extendedeuclideanalgorithm.h \
@@ -47,7 +46,6 @@ HEADERS  += extendedeuclideanalgorithm.h \
     UnitTests/extendedeuclideanalgorithmtest.h \
     UnitTests/sboxtest.h \
     UnitTests/nonlinearitytest.h \
-    function.h \
     nonlinearity.h
 
 FORMS    += mainwindow.ui
