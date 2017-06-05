@@ -1,32 +1,22 @@
 #ifndef NONLINEARITY_H
 #define NONLINEARITY_H
-#include <bitset>
-#include <vector>
+#include "function.h"
 #include "sbox.h"
+#include <math.h>
 
-using namespace std;
-
-typedef bitset<8> Function;
-
-struct Coverage
-{
-    Function function;
-    int coverage;
-};
-
-typedef vector<Coverage> Approximation;
 
 class NonLinearity
 {
-public:
-    NonLinearity();
-    int calucalate(SBox sbox);
-private:
-    Approximation approximation;
-    bool sboxCorrect(SBox sbox);
-    bool computeFunction(Function f, GFNumber input);
-    int computeCoverage(SBox sbox, uint8_t outputPosition, Function f);
 
+public:
+    double compute();
+    NonLinearity(SBox sbox);
+protected:
+    SBox sbox;
+    vector<GFNumber> substitionTable;
+    double WHTValue(GFNumber k, int u);
+    double PARValue();
+    int innerProduct(GFNumber a, GFNumber b);
 };
 
 #endif // NONLINEARITY_H

@@ -22,6 +22,7 @@ void executeTests()
 int main(int argc, char *argv[])
 {
     executeTests();
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

@@ -33,10 +33,9 @@ SOURCES += extendedeuclideanalgorithm.cpp \
     UnitTests/galoisfieldtest.cpp \
     UnitTests/extendedeuclideanalgorithmtest.cpp \
     UnitTests/sboxtest.cpp \
-    nonlinearity.cpp \
     UnitTests/nonlinearitytest.cpp \
-    nonlinearity2.cpp \
-    function.cpp
+    function.cpp \
+    nonlinearity.cpp
 
 HEADERS  += extendedeuclideanalgorithm.h \
     galoisfield.h \
@@ -47,9 +46,8 @@ HEADERS  += extendedeuclideanalgorithm.h \
     UnitTests/galoisfieldtest.h \
     UnitTests/extendedeuclideanalgorithmtest.h \
     UnitTests/sboxtest.h \
-    nonlinearity.h \
     UnitTests/nonlinearitytest.h \
-    nonlinearity2.h \
-    function.h
+    function.h \
+    nonlinearity.h
 
 FORMS    += mainwindow.ui

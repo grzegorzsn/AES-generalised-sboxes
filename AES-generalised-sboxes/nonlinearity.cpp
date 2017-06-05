@@ -1,77 +1,43 @@
 #include "nonlinearity.h"
 
-NonLinearity::NonLinearity()
+
+double NonLinearity::compute()
 {
-    approximation = vector<Coverage>();
-    for(int i = 0; i < 8; i++)
-    {
-        Coverage f;
-        f.coverage = 0;
-        f.function = Function(0);
-        approximation.push_back(f);
-    }
+    int n = 8;
+    return pow(2.0, n / 2 - 1) * ((pow(2.0, n/2) - sqrt(PARValue())));
 }
 
-int NonLinearity::calucalate(SBox sbox)
+NonLinearity::NonLinearity(SBox _sbox)
 {
-    if(!sboxCorrect(sbox)) throw invalid_argument("Only 8x8 S-Boxes are supported!");
-    for(int i = 0; i < 8; i++) // for each bit in sbox output
+    sbox = _sbox;
+    substitionTable = sbox.substitionTable();
+}
+
+double NonLinearity::WHTValue(GFNumber k, int u)
+{
+    int sum = 0;
+    for(int x = 0; x < 256; x++)
     {
-        cout << "#";
-        for(int j = 0; j < 256; j++) // for every possible linear function
+        int exponent = int(substitionTable[x][u]) + innerProduct(GFNumber(x), k);
+        sum += pow(-1.0, exponent);
+    }
+    return pow(2.0, -8.0) * sum;
+}
+
+double NonLinearity::PARValue()
+{
+    double max = WHTValue(GFNumber(0), 0);
+    for(int u = 0; u < 8; u++)
+        for(int k = 0; k < 256; k++)
         {
-            Function f = Function(i);
-            int coverage = computeCoverage(sbox, i, f);
-            if(coverage > approximation[i].coverage)
-            {
-                approximation[i].coverage = coverage;
-                approximation[i].function = f;
-            }
-
+            double Fk = WHTValue(GFNumber(k), u);
+            if(Fk > max) max = Fk;
         }
-    }
-    int min = 257;
-    int max = -1;
-    for(int i = 0; i < 8; i++)
-    {
-        int a = approximation[i].coverage;
-        int b = 256 - approximation[i].coverage;
-        cout << "Coverage: " << approximation[i].coverage << endl;
-        cout << "Coverage: " << 256 - approximation[i].coverage << endl;
-
-    }
-    return -1;
+    return pow(2.0, 8.0) * pow(max, 2.0);
 }
 
-
-bool NonLinearity::sboxCorrect(SBox sbox)
+int NonLinearity::innerProduct(GFNumber a, GFNumber b)
 {
-    vector<GFNumber> sTable = sbox.substitionTable();
-    if(sTable.size() != 256) return false;
-    for(int i = 0; i < sTable.size(); i++)
-        if(GaloisField::degree(sTable[i]) >= 8)
-            return false;
-    return true;
+    GFNumber logicAnd = a&b;
+    return logicAnd.count();
 }
-
-bool NonLinearity::computeFunction(Function f, GFNumber input)
-{
-    bitset<8> i = bitset<8>(input.to_ulong());
-    i ^= f;
-    if(i.count() % 2 == 1) return true;
-    else return false;
-}
-
-int NonLinearity::computeCoverage(SBox sbox, uint8_t outputPosition, Function f)
-{
-    vector<GFNumber> sTable = sbox.substitionTable();
-    int coverage = 0;
-    for(int k = 0; k < 256; k++) // for every possible input value
-    {
-        if(computeFunction(f, GFNumber(k)) == sTable[k][outputPosition])
-            coverage++;
-    }
-    return coverage;
-}
-
-

@@ -2,7 +2,6 @@
 #include <QtTest>
 #include <QCoreApplication>
 #include "nonlinearity.h"
-#include "nonlinearity2.h"
 
 using namespace std;
 
