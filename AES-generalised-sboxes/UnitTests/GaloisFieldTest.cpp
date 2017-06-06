@@ -1,8 +1,7 @@
 #include <QString>
-#include <QtTest>
 #include <QCoreApplication>
 #include "galoisfieldtest.h"
-#include <iostream>
+
 using namespace std;
 
 GaloisFieldTest::GaloisFieldTest()

@@ -1,5 +1,4 @@
 #include <QString>
-#include <QtTest>
 #include <QCoreApplication>
 #include "extendedeuclideanalgorithmtest.h"
 #include "extendedeuclideanalgorithm.h"

@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "nonlinearity.h"
 
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -9,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->lblNonLinearity->setText("");
     prepareSboxTable();
+    QFont font = qApp->font();
+    font.setPixelSize(11);
+    qApp->setFont(font);
 }
 
 MainWindow::~MainWindow()
@@ -19,7 +24,8 @@ MainWindow::~MainWindow()
 void MainWindow::prepareSboxTable()
 {
     QStandardItemModel * tableModel = new QStandardItemModel(16,16,this);
-    ui->tblSBox->setModel(tableModel);    for(int i = 0; i < 16; i++)
+    ui->tblSBox->setModel(tableModel);
+    for(int i = 0; i < 16; i++)
     {
          ui->tblSBox->setColumnWidth(i, 30);
          ui->tblSBox->setRowHeight(i, 20);
@@ -36,6 +42,7 @@ void MainWindow::prepareSboxTable()
         rowsLabels << ssRow.str().c_str();
     }
     tableModel->setHorizontalHeaderLabels(columnsLabels);
+    tableModel->setVerticalHeaderLabels(rowsLabels);
 }
 
 void MainWindow::on_btnGenerate_clicked()
@@ -43,6 +50,7 @@ void MainWindow::on_btnGenerate_clicked()
     try
     {
         QListWidget *listWidget =  ui->lstIrrPol;
+        listWidget->clear();
         uint8_t degree = 8;
         GFIrrPolGenerator * irrPolGen = new GFIrrPolGenerator();
         irrPolGen->setMaxDegree(degree);
@@ -61,7 +69,9 @@ void MainWindow::on_btnGenerate_clicked()
     }
     catch (exception e)
     {
-        cout << e.what() << endl;
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.exec();
     }
 
 }
@@ -69,7 +79,7 @@ void MainWindow::on_btnGenerate_clicked()
 void MainWindow::displaySBox(SBox sbox)
 {
     QStandardItemModel * tableModel = (QStandardItemModel*)ui->tblSBox->model();
-    vector<GFNumber> sboxTable = sbox.substitionTable();
+    vector<GFNumber> sboxTable = sbox.substitutionTable();
 
     for(int i = 0; i < 16; i++) // rows
     {

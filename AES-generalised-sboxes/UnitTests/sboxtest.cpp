@@ -1,5 +1,6 @@
 #include "sboxtest.h"
-#include <iostream>
+
+
 using namespace std;
 
 SBoxTest::SBoxTest()
@@ -41,7 +42,7 @@ void SBoxTest::substitutionTableTest1()
 {
     GFNumber modulus = 0x11b;
     SBox sbox = SBox(modulus);
-    vector<GFNumber> table = sbox.substitionTable();
+    vector<GFNumber> table = sbox.substitutionTable();
     vector<GFNumber>::size_type expectedSize = 256;
     QCOMPARE(table.size(), expectedSize);
     QCOMPARE(table[0], GFNumber(0x63));
@@ -54,7 +55,7 @@ void SBoxTest::substitutionTableTest2()
 {
     GFNumber modulus = 0x165;
     SBox sbox = SBox(modulus);
-    vector<GFNumber> table = sbox.substitionTable();
+    vector<GFNumber> table = sbox.substitutionTable();
     vector<GFNumber>::size_type expectedSize = 256;
     QCOMPARE(table.size(), expectedSize);
 }

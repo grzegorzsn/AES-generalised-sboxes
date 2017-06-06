@@ -1,6 +1,5 @@
 #include "gfirrpolgenerator.h"
 #include <math.h>
-#include <iostream> // TODO: remove after devolpment.
 #include <bitset>
 
 GFIrrPolGenerator::GFIrrPolGenerator()

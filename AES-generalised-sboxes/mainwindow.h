@@ -4,7 +4,6 @@
 #include <QListWidget>
 #include <QMainWindow>
 #include <QStandardItemModel>
-#include <iostream>
 #include <sstream>
 #include "gfirrpolgenerator.h"
 #include "extendedeuclideanalgorithm.h"

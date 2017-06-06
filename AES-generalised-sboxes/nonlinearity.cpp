@@ -10,7 +10,7 @@ double NonLinearity::compute()
 NonLinearity::NonLinearity(SBox _sbox)
 {
     sbox = _sbox;
-    substitionTable = sbox.substitionTable();
+    substitionTable = sbox.substitutionTable();
 }
 
 // Implementation of equation nr 2

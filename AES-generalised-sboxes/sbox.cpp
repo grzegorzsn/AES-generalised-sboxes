@@ -31,7 +31,7 @@ GFNumber SBox::substitute(GFNumber a)
     return transformated ^ GFNumber(0x63);
 }
 
-std::vector<GFNumber> SBox::substitionTable()
+std::vector<GFNumber> SBox::substitutionTable()
 {
     std::vector<GFNumber> result = std::vector<GFNumber>();
     for(int i = 0; i < 256; i++)
